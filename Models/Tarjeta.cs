@@ -24,7 +24,20 @@ namespace CreditoWeb.Models
         /// como estamos dentro de la clase de tarjeta tenemos acceso a la propiedad TarjetaNum 
         private bool esValida()
         {
-            return false;
+            int suma=0;
+            int variable=0;
+            for(int i=TarjetaNum.Length-1;i>=0;i-=2){
+                int l=0;
+            l=(int)Char.GetNumericValue(TarjetaNum[i]);
+          suma=suma+l;
+          variable=0;
+          if(i-1>0){
+          variable=(int)Char.GetNumericValue(TarjetaNum[i-1]);}
+          variable=variable*2;
+          if(variable>9){variable=variable-9;}
+          suma=suma+variable;
+            }
+            return suma%10==0;
         }
 
 
@@ -32,7 +45,18 @@ namespace CreditoWeb.Models
         /// como estamos dentro de la clase de tarjeta tenemos acceso a la propiedad TarjetaNum 
         private TipoTarjeta tipoDeTarjeta()
         {
-            return TipoTarjeta.NOVALIDA;
+            var tipodetarjetacambiante=TipoTarjeta.NOVALIDA;
+            if((TarjetaNum[0]=='3'&&TarjetaNum[1]=='4')||(TarjetaNum[0]=='3'&&TarjetaNum[1]=='7')){
+                tipodetarjetacambiante=TipoTarjeta.AMERICANEXPRESS;
+
+            }
+            if((TarjetaNum[0]=='5'&&TarjetaNum[1]=='1')||(TarjetaNum[0]=='5'&&TarjetaNum[1]=='2')||(TarjetaNum[0]=='5'&&TarjetaNum[1]=='3')||(TarjetaNum[0]=='5'&&TarjetaNum[1]=='4')||(TarjetaNum[0]=='5'&&TarjetaNum[1]=='5')){
+                tipodetarjetacambiante=TipoTarjeta.MASTERCARD;
+            }
+            if(TarjetaNum[0]=='4'){
+                tipodetarjetacambiante=TipoTarjeta.VISA;
+            }
+            return tipodetarjetacambiante;
         }
 
 
