@@ -31,7 +31,7 @@ namespace CreditoWeb.Models
             l=(int)Char.GetNumericValue(TarjetaNum[i]);
           suma=suma+l;
           variable=0;
-          if(i-1>0){
+          if(i-1>=0){
           variable=(int)Char.GetNumericValue(TarjetaNum[i-1]);}
           variable=variable*2;
           if(variable>9){variable=variable-9;}
